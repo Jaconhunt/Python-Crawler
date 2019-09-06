@@ -237,3 +237,44 @@ from urllib.parse import unquote
 
 url = 'https://www.baidu.com/s?wd=%E5%A3%81%E7%BA%B8'
 print(unquote(url))
+
+from urllib.robotparser import RobotFileParser
+
+rp = RobotFileParser()
+rp.set_url('http://www.jianshu.com/robots.txt')
+rp.read()
+
+print(rp.can_fetch('*', 'http://www.jianshu.com/p/b67554025d7d'))
+print(rp.can_fetch('*', "http://wwww.jianshu.com/search?q=python&page=1&type=collections"))
+
+from urllib.robotparser import RobotFileParser
+from urllib.request import urlopen
+
+rp = RobotFileParser()
+rp.parse(urlopen('http://www.jianshu.com/robots.txt').read().decode('utf-8').split('\n'))
+print(rp.can_fetch('*', 'http://www.jianshu.com/p/b67554025d7d'))
+print(rp.can_fetch('*', "http://wwww.jianshu.com/search?q=python&page=1&type=collections"))
+# HTTPError: HTTP Error 403: Forbidden 会报错
+
+import requests
+
+r = requests.get('http://www.baidu.com/')
+
+print(type(r))
+print(r.status_code)
+print(type(r.text))
+print(r.text)
+print(r.cookies)
+
+import requests
+
+r = requests.get('http://httpbin.org/get')
+print(r.text)
+
+data = {
+    'name': 'germey',
+    'age': 22
+}
+
+r = requests.get('http://httpbin.org/get', params= data)
+print(r.text)
