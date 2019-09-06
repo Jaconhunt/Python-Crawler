@@ -310,3 +310,29 @@ import requests
 r = requests.get("https://github.com/favicon.ico")
 with open('favicon.ico', 'wb') as f:
     f.write(r.content)
+
+    import requests
+
+data = {'name':'germey','age': '22'}
+r = requests.post("http://httpbin.org/post", data =data)
+print(r.text)
+
+import requests
+
+r = requests.get('http://www.jianshu.com')
+
+print(type(r.status_code), r.status_code)
+print(type(r.headers), r.headers)
+print(type(r.cookies), r.cookies)
+print(type(r.url), r.url)
+print(type(r.history), r.history)
+
+import requests
+r = requests.get('http://www.jianshu.com')
+exit() if not r.status code == requests.codes.ok else print('Request Successfully')
+#以上代码报错
+
+import requests
+files = {'file': open ('favicon.ico','rb')}
+r = requests.post ("http://httpbin.org/post", files=files)
+print(r.text)
