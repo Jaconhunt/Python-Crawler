@@ -31,14 +31,14 @@ print(response.read())
 
 import urllib.request
 
-response = urllib.request.urlopen('http://httpbin.org/get', timeout = 0.2 ) #timeout ĞŞ¸ÄÎª0.2, 1 ¿ÉÒÔÕı³£Êä³ö
+response = urllib.request.urlopen('http://httpbin.org/get', timeout = 0.2 ) #timeout ä¿®æ”¹ä¸º0.2, 1 å¯ä»¥æ­£å¸¸è¾“å‡º
 print(response.read())
 
 import socket
 import urllib.request
 
 try:
-    response = urllib.request.urlopen('http://httpbin.org/get', timeout = 0.2 ) #timeout ĞŞ¸ÄÎª0.2, 1 ¿ÉÒÔÕı³£Êä³ö
+    response = urllib.request.urlopen('http://httpbin.org/get', timeout = 0.2 ) #timeout ä¿®æ”¹ä¸º0.2, 1 å¯ä»¥æ­£å¸¸è¾“å‡º
 except urllib.error.URLError as e:
     if isinstance(e.reason, socket.timeout):
         print('TIME OUT')
@@ -129,7 +129,7 @@ opener = urllib.request.build_opener(handler)
 response = opener.open('http://www.baidu.com')
 print(response.read().decode('utf-8'))
 
-#´Ë¶Î´úÂëÓĞÎÊÌâ, ĞèÒªÔÚloadºó¼Ór
+#æ­¤æ®µä»£ç æœ‰é—®é¢˜, éœ€è¦åœ¨loadååŠ r
 #https://stackoverflow.com/questions/37400974/unicode-error-unicodeescape-codec-cant-decode-bytes-in-position-2-3-trunca
 
 from urllib import request, error
@@ -138,3 +138,11 @@ try:
     response = request.urlopen('http://cuiqingcai.com/index.htm')
 except error.URLError as e:
     print(e.reason)
+
+from  urllib import request, error
+try:
+    response = request.urlopen('http://cuiqingcai.com/index.htm')
+except error.HTTPError as e:
+    print(e.reason, e.code, e.headers, seq= '\n')
+# ä¸Šé¢ä»£ç æœ‰è¯¯,åº”è¯¥å»é™¤seq = '\n'
+# 'seq' is an invalid keyword argument for this function
