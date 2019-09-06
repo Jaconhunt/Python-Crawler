@@ -169,3 +169,39 @@ except urllib.error.URLError as e:
     if isinstance(e.reason, socket.timeout):
         print('TIME OUT')
 #会报错，也会输出
+
+from urllib.parse import urlparse
+
+result = urlparse('http://www.baidu.com/index.htm; user?id=5#comment')
+print(type(result), result)
+
+from urllib.parse import urlparse
+
+result = urlparse('http://www.baidu.com/index.htm; user?id=5#comment', scheme = 'https')
+print(result)
+
+from urllib.parse import urlparse
+
+result = urlparse('http://www.baidu.com/index.html#comment', allow_fragments= False)
+print(result)
+
+from urllib.parse import urlparse
+
+result = urlparse('http://www.baidu.com/index.html#comment', allow_fragments= False)
+print(result.scheme, result[0], result.netloc, result[1])
+
+from urllib.parse import urlunparse
+
+data = ['http', 'www.baidu.com', 'index.html', 'user', 'a = 6', 'comment']  #长度为6
+print(urlunparse(data))
+
+
+from urllib.parse import urlsplit
+from urllib.parse import urlunsplit
+
+result = urlsplit('http://www.baidu.com/index.html;user?id=5#comment')
+print(result)
+
+data = ['http', 'www.baidu.com', 'index.html',  'a = 6', 'comment']
+print(result.scheme, result[0])
+print(urlunsplit(data))
