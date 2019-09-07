@@ -384,3 +384,33 @@ result = re.match('^He.*?(\d+).*Demo$',content)
 print(result)
 print(result.group(1)) #非贪婪匹配
 
+import re
+
+content = 'http://weibo.com/comment/kEraCN'
+result1 = re.match('^http.*?comment/(.*?)',content)
+result2 = re.match('^http.*?comment/(.*)',content)
+print('result1', result1.group(1))
+print('result2', result2.group(1)) #注意末尾匹配情况
+
+#修饰符，源代码有误
+import re
+
+content = 'Hello 1234567 World_This \
+is a Regex Demo'
+result = re.match('^He.*?(\d+).*?Demo$',content, re.S)
+print(result.group(1))
+
+#转义匹配，此处括号和点均转义
+import re
+
+content = '(百度)www.baidu.com'
+result = re.match('\(百度\)www\.baidu\.com', content)
+print(result)
+
+#search(）
+import re
+
+content = 'Extra stings Hello 1234567 World_This is a Regex Demo Extra stings'
+result =re.search('Hello.*?(\d+).*?Demo', content)
+print(result)
+
