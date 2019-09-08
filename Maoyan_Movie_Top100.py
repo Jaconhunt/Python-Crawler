@@ -49,3 +49,11 @@ if __name__ == '__main__':
     for i in range(10):
         main(offset=i*10)
         time.sleep(1)
+#代码来源于崔庆才《Python3 网络爬虫开发实战》
+'''
+可以学习的地方有如下：
+1. Request用法
+2. Try Except异常处理
+3. yield 生成器
+4. json用法
+'''
