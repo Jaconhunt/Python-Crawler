@@ -872,4 +872,11 @@ print([result['name'] for result in results])
 
 results = collection.find().sort('name', pymongo.ASCENDING).skip(2).limit(2)
 print([result['name'] for result in results])
+
+#更新
+condition = {'name': 'Kevin'}
+student = collection.find_one(condition)
+student['age'] = 25
+result = collection.update(condition, student)
+print(result)
 #第8章验证码识别
