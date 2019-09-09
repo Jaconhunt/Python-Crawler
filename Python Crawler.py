@@ -508,3 +508,25 @@ from bs4 import BeautifulSoup
 
 soup = BeautifulSoup('<p>Hello</p>', 'lxml')
 print(soup.p.string)
+
+#第5章 数据存储
+import requests
+from pyquery import PyQuery as pq
+
+url = "https://www.zhihu.com/explore"
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko)\
+                  Chrome/58.0.3029.110 Safari/537.36'
+}
+html = requests.get(url, headers=headers).text  # 获取网页源代码文本
+doc = pq(html)
+items = doc('.explore-tab .feed-item').items()  # 结果是列表形式
+file = open('explore.txt', 'a', encoding="utf-8")
+for item in items:
+    question = item.find('h2').text()   # 获取每个标题
+    author = item.find('.author-link-line').text()      # 获取每个标题的作者
+    answer = pq(item.find('.content').html()).text()    # 先找到html文本，再转换为pyquery对象，再获取文本
+    file.write('\n'.join([question, author, answer]))   # 将标题、作者、回答放在一起
+    file.write('\n' + '=' * 50 + '\n')
+file.close()
+#此种方式无法得到内容，可能被反爬虫
