@@ -3,7 +3,7 @@
 # @Time    : 2019-9-8 13:37
 # @Author  : JaocnHunt
 # @Site    : 
-# @File    : Python_100.py
+# @File    : Python Crawler.py
 # @Software: PyCharm
 
 import urllib.request
@@ -781,3 +781,95 @@ try:
         row = cursor.fetchone()
 except:
     print('Error')
+
+#连接数据库MongoDB
+import pymongo
+
+client = pymongo.MongoClient(host = 'localhost', port = 27017)
+
+db = client.test
+collection = db.students
+
+student ={
+    'id': '20170101',
+    'name': 'Jordan',
+    'age': 20,
+    'gender': 'male'
+}
+result = collection.insert(student)
+print(result)
+
+#建表、查询
+import pymongo
+
+client = pymongo.MongoClient(host = 'localhost', port = 27017)
+
+db = client.test # test数据库
+collection = db.students2 # students表
+
+student3 ={
+    'id': '20170101',
+    'name': 'Jordan',
+    'age': 20,
+    'gender': 'male'
+}
+student4 ={
+    'id': '20170202',
+    'name': 'Mike',
+    'age': 21,
+    'gender': 'male'
+}
+student5 ={
+    'id': '20170103',
+    'name': 'Kevin',
+    'age': 24,
+    'gender': 'male'
+}
+student6 ={
+    'id': '20170104',
+    'name': 'Harden',
+    'age': 25,
+    'gender': 'male'
+}
+student7 ={
+    'id': '20170105',
+    'name': 'Mark',
+    'age': 23,
+    'gender': 'male'
+}
+
+result = collection.insert_many([student3, student4, student5, student6, student7])
+print(result)
+print(result.inserted_ids)
+
+result = collection.find_one({'name': 'Mike'})
+print(type(result))
+print(result)
+
+results = collection.find({'age': 20})
+print(results)
+
+for result3 in results:
+    print(result3)
+    
+result = collection.find({'age': {'$gt': 20}}) #年龄大于20
+print(result)
+
+results = collection.find({'name': {'$regex': '^M.*'}}) #正则匹配M开头
+print(results)
+
+#计数
+count = collection.find({'age': 20}).count()
+print(count)
+
+#排序
+results = collection.find().sort('name', pymongo.ASCENDING)
+print([result['name'] for result in results])
+
+#偏移、截取
+results = collection.find().sort('name', pymongo.ASCENDING).skip(2)
+print([result['name'] for result in results])
+
+results = collection.find().sort('name', pymongo.ASCENDING).skip(2).limit(2)
+print([result['name'] for result in results])
+#第8章验证码识别
