@@ -911,4 +911,17 @@ print(redis.get('name'))
 
 #第6章Ajax数据爬取
 #两个实例，微博、头条街拍爬取
+
+#第7章动态渲染页面爬取
+from selenium import webdriver
+import time
+def main():
+    b=webdriver.Chrome(executable_path = r'C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
+    b.get('http://www.baidu.com')
+    time.sleep(5)
+    b.quit()
+if __name__ == '__main__':
+    main()
+
+
 #第8章验证码识别
