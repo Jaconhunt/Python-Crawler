@@ -902,6 +902,13 @@ print(result.deleted_count)
 result = collection.delete_many({'age': {'$lt' :25}})
 print(result.deleted_count)
 
-#连接数据库Redis
+#连接数据库Redis，省略redisdump
+from redis import StrictRedis
 
+redis = StrictRedis(host='localhost', port=6379, db=0 ) #还未设置密码
+redis.set('name', 'Bob')
+print(redis.get('name'))
+
+#第6章Ajax数据爬取
+#两个实例，微博、头条街拍爬取
 #第8章验证码识别
