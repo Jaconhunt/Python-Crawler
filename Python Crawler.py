@@ -879,4 +879,29 @@ student = collection.find_one(condition)
 student['age'] = 25
 result = collection.update(condition, student)
 print(result)
+
+#另一种更新，update_one
+condition = {'name': 'Kevin'}
+student = collection.find_one(condition)
+student['age'] = 27
+result = collection.update_one(condition, {'$set': student})
+print(result)
+print(result.matched_count, result.modified_count)
+
+#多条数据更新，update_many
+condition = {'age': {'$gt': 20}}
+result = collection.update_many(condition, {'$inc': {'age':1}})
+print(result)
+print(result.matched_count, result.modified_count)
+
+#删除
+#result = collection.remove({'name': 'Kevin'})
+result = collection.delete_one({'name': 'Kevin'})
+print(result)
+print(result.deleted_count)
+result = collection.delete_many({'age': {'$lt' :25}})
+print(result.deleted_count)
+
+#连接数据库Redis
+
 #第8章验证码识别
