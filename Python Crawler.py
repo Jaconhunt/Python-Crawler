@@ -960,3 +960,15 @@ print(input_first, input_second, input_third)
 browser.close() #元素选择需要注意
 #Splash使用
 #第8章验证码识别
+
+#第9章代理使用
+
+#第10章模拟登陆
+
+#第11章App的爬取
+
+#第12章pyspider
+
+#第13章scrapy
+
+#第14章分布式爬虫与部署
