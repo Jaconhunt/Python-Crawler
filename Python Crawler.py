@@ -959,8 +959,27 @@ input_third = browser.find_element_by_xpath('//*[@id= "q"]')
 print(input_first, input_second, input_third)
 browser.close() #元素选择需要注意
 #Splash使用
-#第8章验证码识别
 
+#第8章验证码识别
+import pytesseract
+from PIL import Image
+
+image = Image.open(r'code2.jpg')
+image = image.convert('L')
+threshold = 80
+table = []
+for i in range(256):
+    if i < threshold:
+        table.append(0)
+    else:
+        table.append(1)
+result = pytesseract.image_to_string(image)
+print(result)
+
+image = Image.open(r'code2.jpg')
+result = pytesseract.image_to_string(image)
+print(result)
+#经测试发现识别仍有问题
 #第9章代理使用
 
 #第10章模拟登陆
